@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mobileFrame{
+            width: 320px;
+            height: 600px;
+            background-color: black;
+            border-radius: 15px;
+            position: relative;
+            top: 120px;
+        }
+
+        .itemContainer{
+            position: relative;
+            top: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+        }
+
+        .input{
+            position: relative;
+            top: 190px;
+            right: 20px;
+            
+            
+        }
+        
+        input{
+            width: 90%;
+            text-align: end;
+            height: 50px;
+            font-size: 40px;
+            font-weight: bold;
+            border: none;
+            background-color: transparent;
+            color: white;
+        }
+
+        .item{
+            width: 60px;
+            height: 60px;
+            margin: 3px;
+            border-radius: 80px;
+            font-size: 26px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .gray{
+            background-color: rgba(128, 128, 128, 0.575);
+            color: white;
+        }
+
+         .red{
+            color: rgb(255, 9, 9);
+            font-weight: bolder;
+            font-size: 40px;
+            text-align: center;
+         }
+       
+         .newStyle{
+            font-size: 30px;
+         }
+    </style>
+</head>
+<body>
+    <main class="mobileFrame">
+        <div class="input">
+            <input type="text">
+        </div>
+        <div class="itemContainer">
+            <button class="item newStyle red">(</button>
+            <button class="item newStyle red">)</button>
+            <button class="item newStyle red">A</button>
+            <button class="item red ">+</button>
+        </div>
+        <div class="itemContainer">
+            <button class="item gray">1</button>
+            <button class="item gray">2</button>
+            <button class="item gray">3</button>
+            <button class="item red ">+</button>
+        </div>
+        <div class="itemContainer">
+            <button class="item gray">4</button>
+            <button class="item gray">5</button>
+            <button class="item gray">6</button>
+            <button class="item substract red">-</button>
+        </div>
+        <div class="itemContainer">
+            <button class="item gray">7</button>
+            <button class="item gray">8</button>
+            <button class="item gray">0</button>
+            <button class="item red ">*</button>
+        </div>
+        <div class="itemContainer">
+            <button class="item gray">%</button>
+            <button class="item gray">AC</button>
+            <button class="item gray">/</button>
+            <button class="item red ">=</button>
+        </div>
+    </main>
+
+    <script>
+
+        let str = "";
+        let input = document.querySelector('input');
+        let button = document.querySelectorAll('.item');
+        
+        Array.from(button).forEach((buttons)=>{
+            buttons.addEventListener('click', (e)=>{
+                if(e.target.innerHTML == '=')
+                {
+                    str = eval(str);
+                    document.querySelector('input').value = str;
+                }
+                else if(e.target.innerHTML == 'AC')
+                {
+                    str = "";
+                    document.querySelector('input').value = str;
+                }
+
+                else if((str == "") && (
+                    e.target.innerHTML == '+' ||
+                    e.target.innerHTML == '-' ||
+                    e.target.innerHTML == '*' ||
+                    e.target.innerHTML == '%' ||
+                    e.target.innerHTML == 'AC' ||
+                    e.target.innerHTML == '=' ||
+                    e.target.innerHTML == '/' ) ||
+                     (str == undefined))
+                    {
+                        str = "";
+                        document.querySelector('input').value = str;
+                    }
+
+                else if(e.target.innerHTML == 'A')
+                {
+                    str = str.replace(str.charAt((str.length - 1)), '');
+                    document.querySelector('input').value = str;
+                }
+                else
+                {
+                    str = str + e.target.innerHTML;
+                    document.querySelector('input').value = str;
+                }
+            })
+        })
+    </script>
+</body>
+</html>
